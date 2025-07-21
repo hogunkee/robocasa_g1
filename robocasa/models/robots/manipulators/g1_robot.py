@@ -40,7 +40,10 @@ class G1ArmsOnlyFourierHands(G1ArmsOnly):
 class G1ArmsAndWaist(G1):
     def __init__(self, idn=0):
         super().__init__(idn=idn)
-        self._remove_joint_actuation("leg")
+        # self._remove_joint_actuation("leg")
+        self._remove_joint_actuation("hip")
+        self._remove_joint_actuation("knee")
+        self._remove_joint_actuation("ankle")
         self._remove_joint_actuation("head")
         self._remove_free_joint()
 
