@@ -1178,6 +1178,21 @@ class Tabletop(ManipulationEnv, metaclass=TabletopEnvMeta):
                 camera_attribs=dict(fovy="77"),
                 parent_body="robot0_head_pitch",
             )
+        
+        # Add world camera
+        worldview_mount_body = find_elements(
+            root=self.robots[0].robot_model.root,
+            tags="body",
+            attribs={"name": "robot0_base"},
+        )
+        if worldview_mount_body is not None:
+            self._cam_configs["worldview"] = dict(
+                pos=[0.75, 0.0, 0.9,],
+                quat=[0.683, 0.183, 0.183, 0.683],
+                # quat=[0.653, 0.271, 0.271, 0.653],
+                camera_attribs=dict(fovy="77"),
+                parent_body="robot0_base",
+            )
 
         if self.randomize_cameras:
             self._randomize_cameras()

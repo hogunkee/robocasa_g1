@@ -11,6 +11,9 @@ from robocasa.models.robots import (
     GROOT_ROBOCASA_ENVS_GR1_ARMS_ONLY,
     GROOT_ROBOCASA_ENVS_GR1_ARMS_AND_WAIST,
     GROOT_ROBOCASA_ENVS_GR1_FIXED_LOWER_BODY,
+    GROOT_ROBOCASA_ENVS_G1_ARMS_ONLY,
+    GROOT_ROBOCASA_ENVS_G1_ARMS_AND_WAIST,
+    GROOT_ROBOCASA_ENVS_G1_FIXED_LOWER_BODY,
     gather_robot_observations,
     make_key_converter,
 )
@@ -107,6 +110,9 @@ class RoboCasaEnv(gym.Env):
             robots_name in GROOT_ROBOCASA_ENVS_GR1_ARMS_ONLY
             or robots_name in GROOT_ROBOCASA_ENVS_GR1_ARMS_AND_WAIST
             or robots_name in GROOT_ROBOCASA_ENVS_GR1_FIXED_LOWER_BODY
+            or robots_name in GROOT_ROBOCASA_ENVS_G1_ARMS_ONLY
+            or robots_name in GROOT_ROBOCASA_ENVS_G1_ARMS_AND_WAIST
+            or robots_name in GROOT_ROBOCASA_ENVS_G1_FIXED_LOWER_BODY
         ):
             controller_configs["type"] = "BASIC"
             controller_configs["composite_controller_specific_configs"] = {}

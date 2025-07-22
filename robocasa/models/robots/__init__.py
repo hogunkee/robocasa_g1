@@ -240,9 +240,9 @@ class RobotKeyConverter:
 class G1ArmsOnlyKeyConverter(RobotKeyConverter):
     @classmethod
     def get_camera_config(cls):
-        mapped_names = ["video.ego_view_pad_res256_freq20"]
+        mapped_names = ["video.ego_view_pad_res256_freq20", "video.world_view"]
         camera_names = [
-            "egoview",
+            "egoview", "worldview"
         ]
         camera_widths, camera_heights = 1280, 800
         return mapped_names, camera_names, camera_widths, camera_heights
@@ -300,9 +300,9 @@ class G1ArmsOnlyKeyConverter(RobotKeyConverter):
 class G1ArmsAndWaistKeyConverter(RobotKeyConverter):
     @classmethod
     def get_camera_config(cls):
-        mapped_names = ["video.ego_view_pad_res256_freq20"]
+        mapped_names = ["video.ego_view_pad_res256_freq20", "video.world_view"]
         camera_names = [
-            "egoview",
+            "egoview", "worldview"
         ]
         camera_widths, camera_heights = 1280, 800
         return mapped_names, camera_names, camera_widths, camera_heights
@@ -427,9 +427,9 @@ class G1FixedLowerBodyKeyConverter(RobotKeyConverter):
 class GR1ArmsOnlyKeyConverter(RobotKeyConverter):
     @classmethod
     def get_camera_config(cls):
-        mapped_names = ["video.ego_view_pad_res256_freq20"]
+        mapped_names = ["video.ego_view_pad_res256_freq20", "video.world_view"]
         camera_names = [
-            "egoview",
+            "egoview", "worldview"
         ]
         camera_widths, camera_heights = 1280, 800
         return mapped_names, camera_names, camera_widths, camera_heights
@@ -487,9 +487,9 @@ class GR1ArmsOnlyKeyConverter(RobotKeyConverter):
 class GR1ArmsAndWaistKeyConverter(RobotKeyConverter):
     @classmethod
     def get_camera_config(cls):
-        mapped_names = ["video.ego_view_pad_res256_freq20"]
+        mapped_names = ["video.ego_view_pad_res256_freq20", "video.world_view"]
         camera_names = [
-            "egoview",
+            "egoview", "worldview"
         ]
         camera_widths, camera_heights = 1280, 800
         return mapped_names, camera_names, camera_widths, camera_heights
