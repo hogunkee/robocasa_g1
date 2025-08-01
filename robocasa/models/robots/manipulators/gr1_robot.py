@@ -3,6 +3,7 @@ import numpy as np
 from robosuite.robots import register_robot_class
 from robosuite.models.robots import GR1
 from robosuite.models.robots.manipulators.gr1_robot import (
+    GR1,
     GR1FixedLowerBody,
     GR1ArmsOnly,
 )
@@ -57,3 +58,23 @@ class GR1ArmsAndWaist(GR1):
 @register_robot_class("LeggedRobot")
 class GR1ArmsAndWaistFourierHands(GR1ArmsAndWaist):
     pass
+
+
+@register_robot_class("LeggedRobot")
+class GR1Full(GR1):
+    def __init__(self, idn=0):
+        super().__init__(idn=idn)
+
+
+@register_robot_class("LeggedRobot")
+class GR1FullInspireHands(GR1Full):
+    @property
+    def default_gripper(self):
+        return {"right": "InspireRightHand", "left": "InspireLeftHand"}
+
+@register_robot_class("LeggedRobot")
+class GR1FullFourierHands(GR1Full):
+    @property
+    def default_gripper(self):
+        return {"right": "FourierRightHand", "left": "FourierLeftHand"}
+

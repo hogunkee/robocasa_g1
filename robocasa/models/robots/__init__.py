@@ -237,6 +237,72 @@ class RobotKeyConverter:
         return action_space
 
 
+class G1FullKeyConverter(RobotKeyConverter):
+    @classmethod
+    def get_camera_config(cls):
+        mapped_names = ["video.agentview_pad_res256_freq20"]
+        camera_names = [
+            "agentview", "worldview"
+        ]
+        camera_widths, camera_heights = 1280, 800
+        return mapped_names, camera_names, camera_widths, camera_heights
+
+    @classmethod
+    def map_obs(cls, input_obs):
+        output_obs = type(input_obs)()
+        output_obs = {
+            "hand.right_hand": input_obs["robot0_right_gripper"],
+            "hand.left_hand": input_obs["robot0_left_gripper"],
+            "body.right_arm": input_obs["robot0_right"],
+            "body.left_arm": input_obs["robot0_left"],
+            "body.waist": input_obs["robot0_torso"],
+            "body.neck": input_obs["robot0_head"],
+            "body.legs": input_obs["robot0_legs"],
+        }
+        return output_obs
+
+    @classmethod
+    def map_action(cls, input_action):
+        output_action = type(input_action)()
+        output_action = {
+            "hand.left_hand": input_action["robot0_left_gripper"],
+            "hand.right_hand": input_action["robot0_right_gripper"],
+            "body.left_arm": input_action["robot0_left"],
+            "body.right_arm": input_action["robot0_right"],
+            "body.waist": input_action["robot0_torso"],
+            "body.neck": input_action["robot0_head"],
+            "body.legs": input_action["robot0_legs"],
+        }
+        return output_action
+
+    @classmethod
+    def unmap_action(cls, input_action):
+        output_action = type(input_action)()
+        output_action = {
+            "robot0_left_gripper": input_action["action.left_hand"],
+            "robot0_right_gripper": input_action["action.right_hand"],
+            "robot0_left": input_action["action.left_arm"],
+            "robot0_right": input_action["action.right_arm"],
+            "robot0_torso": input_action["action.waist"],
+            "robot0_head": input_action["action.neck"],
+            "robot0_legs": input_action["action.legs"],
+        }
+        return output_action
+
+    @classmethod
+    def get_missing_keys_in_dumping_dataset(cls):
+        return {
+            "body.right_leg": np.zeros(6, dtype=np.float64),
+            "body.left_leg": np.zeros(6, dtype=np.float64),
+        }
+
+    @classmethod
+    def get_metadata(cls, name):
+        return {
+            "absolute": True,
+            "rotation_type": None,
+        }
+
 class G1ArmsOnlyKeyConverter(RobotKeyConverter):
     @classmethod
     def get_camera_config(cls):
@@ -362,9 +428,9 @@ class G1ArmsAndWaistKeyConverter(RobotKeyConverter):
 class G1FixedLowerBodyKeyConverter(RobotKeyConverter):
     @classmethod
     def get_camera_config(cls):
-        mapped_names = ["video.agentview_pad_res256_freq20"]
+        mapped_names = ["video.ego_view_pad_res256_freq20", "video.world_view"]
         camera_names = [
-            "agentview",
+            "egoview", "worldview"
         ]
         camera_widths, camera_heights = 1280, 800
         return mapped_names, camera_names, camera_widths, camera_heights
@@ -422,7 +488,71 @@ class G1FixedLowerBodyKeyConverter(RobotKeyConverter):
             "rotation_type": None,
         }
 
+class GR1FullKeyConverter(RobotKeyConverter):
+    @classmethod
+    def get_camera_config(cls):
+        mapped_names = ["video.ego_view_pad_res256_freq20", "video.world_view"]
+        camera_names = [
+            "egoview", "worldview"
+        ]
+        camera_widths, camera_heights = 1280, 800
+        return mapped_names, camera_names, camera_widths, camera_heights
 
+    @classmethod
+    def map_obs(cls, input_obs):
+        output_obs = type(input_obs)()
+        output_obs = {
+            "hand.right_hand": input_obs["robot0_right_gripper"],
+            "hand.left_hand": input_obs["robot0_left_gripper"],
+            "body.right_arm": input_obs["robot0_right"],
+            "body.left_arm": input_obs["robot0_left"],
+            "body.waist": input_obs["robot0_torso"],
+            "body.neck": input_obs["robot0_head"],
+            "body.legs": input_obs["robot0_legs"],
+        }
+        return output_obs
+
+    @classmethod
+    def map_action(cls, input_action):
+        output_action = type(input_action)()
+        output_action = {
+            "hand.left_hand": input_action["robot0_left_gripper"],
+            "hand.right_hand": input_action["robot0_right_gripper"],
+            "body.left_arm": input_action["robot0_left"],
+            "body.right_arm": input_action["robot0_right"],
+            "body.waist": input_action["robot0_torso"],
+            "body.neck": input_action["robot0_head"],
+            "body.legs": input_action["robot0_legs"],
+        }
+        return output_action
+
+    @classmethod
+    def unmap_action(cls, input_action):
+        output_action = type(input_action)()
+        output_action = {
+            "robot0_left_gripper": input_action["action.left_hand"],
+            "robot0_right_gripper": input_action["action.right_hand"],
+            "robot0_left": input_action["action.left_arm"],
+            "robot0_right": input_action["action.right_arm"],
+            "robot0_torso": input_action["action.waist"],
+            "robot0_head": input_action["action.neck"],
+            "robot0_legs": input_action["action.legs"],
+        }
+        return output_action
+
+    @classmethod
+    def get_missing_keys_in_dumping_dataset(cls):
+        return {
+            "body.right_leg": np.zeros(6, dtype=np.float64),
+            "body.left_leg": np.zeros(6, dtype=np.float64),
+        }
+
+    @classmethod
+    def get_metadata(cls, name):
+        return {
+            "absolute": True,
+            "rotation_type": None,
+        }
 
 class GR1ArmsOnlyKeyConverter(RobotKeyConverter):
     @classmethod
@@ -907,6 +1037,11 @@ class PandaDexRHPandaDexRHKeyConverter(RobotKeyConverter):
 
 
 # The values are only used in groot dataset embodiment tag and env name
+GROOT_ROBOCASA_ENVS_G1_FULL = {
+    "G1Full": "g1_full_fourier_hands",
+    "G1FullInspireHands": "g1_full_inspire_hands",
+    "G1FullFourierHands": "g1_full_fourier_hands",
+}
 GROOT_ROBOCASA_ENVS_G1_ARMS_ONLY = {
     "G1ArmsOnly": "g1_arms_only_fourier_hands",
     "G1ArmsOnlyInspireHands": "g1_arms_only_inspire_hands",
@@ -919,6 +1054,11 @@ GROOT_ROBOCASA_ENVS_G1_FIXED_LOWER_BODY = {
     "G1FixedLowerBody": "g1_fixed_lower_body_fourier_hands",
     "G1FixedLowerBodyInspireHands": "g1_fixed_lower_body_inspire_hands",
     "G1FixedLowerBodyFourierHands": "g1_fixed_lower_body_fourier_hands",
+}
+GROOT_ROBOCASA_ENVS_GR1_FULL = {
+    "GR1Full": "gr1_full_fourier_hands",
+    "GR1FullInspireHands": "gr1_full_inspire_hands",
+    "GR1FullFourierHands": "gr1_full_fourier_hands",
 }
 GROOT_ROBOCASA_ENVS_GR1_ARMS_ONLY = {
     "GR1ArmsOnly": "gr1_arms_only_fourier_hands",
@@ -944,9 +1084,11 @@ GROOT_ROBOCASA_ENVS_BIMANUAL_HAND = {
     "PandaDexRH_PandaDexLH": "bimanual_panda_inspire_hand",
 }
 GROOT_ROBOCASA_ENVS_ROBOTS = {
+    **GROOT_ROBOCASA_ENVS_G1_FULL,
     **GROOT_ROBOCASA_ENVS_G1_ARMS_ONLY,
     **GROOT_ROBOCASA_ENVS_G1_ARMS_AND_WAIST,
     **GROOT_ROBOCASA_ENVS_G1_FIXED_LOWER_BODY,
+    **GROOT_ROBOCASA_ENVS_GR1_FULL,
     **GROOT_ROBOCASA_ENVS_GR1_ARMS_ONLY,
     **GROOT_ROBOCASA_ENVS_GR1_ARMS_AND_WAIST,
     **GROOT_ROBOCASA_ENVS_GR1_FIXED_LOWER_BODY,
@@ -957,12 +1099,16 @@ GROOT_ROBOCASA_ENVS_ROBOTS = {
 
 
 def make_key_converter(robots_name):
-    if robots_name in GROOT_ROBOCASA_ENVS_G1_ARMS_ONLY:
+    if robots_name in GROOT_ROBOCASA_ENVS_G1_FULL:
+        return G1FullKeyConverter
+    elif robots_name in GROOT_ROBOCASA_ENVS_G1_ARMS_ONLY:
         return G1ArmsOnlyKeyConverter
     elif robots_name in GROOT_ROBOCASA_ENVS_G1_ARMS_AND_WAIST:
         return G1ArmsAndWaistKeyConverter
     elif robots_name in GROOT_ROBOCASA_ENVS_G1_FIXED_LOWER_BODY:
         return G1FixedLowerBodyKeyConverter
+    elif robots_name in GROOT_ROBOCASA_ENVS_GR1_FULL:
+        return GR1FullKeyConverter
     elif robots_name in GROOT_ROBOCASA_ENVS_GR1_ARMS_ONLY:
         return GR1ArmsOnlyKeyConverter
     elif robots_name in GROOT_ROBOCASA_ENVS_GR1_ARMS_AND_WAIST:

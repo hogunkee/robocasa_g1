@@ -8,9 +8,11 @@ import robosuite
 from gymnasium import spaces
 from robocasa.environments.tabletop.tabletop import Tabletop
 from robocasa.models.robots import (
+    GROOT_ROBOCASA_ENVS_GR1_FULL,
     GROOT_ROBOCASA_ENVS_GR1_ARMS_ONLY,
     GROOT_ROBOCASA_ENVS_GR1_ARMS_AND_WAIST,
     GROOT_ROBOCASA_ENVS_GR1_FIXED_LOWER_BODY,
+    GROOT_ROBOCASA_ENVS_G1_FULL,
     GROOT_ROBOCASA_ENVS_G1_ARMS_ONLY,
     GROOT_ROBOCASA_ENVS_G1_ARMS_AND_WAIST,
     GROOT_ROBOCASA_ENVS_G1_FIXED_LOWER_BODY,
@@ -107,9 +109,11 @@ class RoboCasaEnv(gym.Env):
             robot=robots_name.split("_")[0],
         )
         if (
-            robots_name in GROOT_ROBOCASA_ENVS_GR1_ARMS_ONLY
+            robots_name in GROOT_ROBOCASA_ENVS_GR1_FULL
+            or robots_name in GROOT_ROBOCASA_ENVS_GR1_ARMS_ONLY
             or robots_name in GROOT_ROBOCASA_ENVS_GR1_ARMS_AND_WAIST
             or robots_name in GROOT_ROBOCASA_ENVS_GR1_FIXED_LOWER_BODY
+            or robots_name in GROOT_ROBOCASA_ENVS_G1_FULL
             or robots_name in GROOT_ROBOCASA_ENVS_G1_ARMS_ONLY
             or robots_name in GROOT_ROBOCASA_ENVS_G1_ARMS_AND_WAIST
             or robots_name in GROOT_ROBOCASA_ENVS_G1_FIXED_LOWER_BODY

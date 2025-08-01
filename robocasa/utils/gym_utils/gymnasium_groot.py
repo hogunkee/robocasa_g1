@@ -7,8 +7,8 @@ from gymnasium import spaces
 from gymnasium.envs.registration import register
 
 from robocasa.models.robots import GROOT_ROBOCASA_ENVS_ROBOTS
-from robocasa.models.robots.manipulators.gr1_robot import GR1ArmsOnly, GR1ArmsAndWaist
-from robocasa.models.robots.manipulators.g1_robot import G1ArmsOnly, G1ArmsAndWaist
+from robocasa.models.robots.manipulators.gr1_robot import GR1Full, GR1ArmsOnly, GR1ArmsAndWaist
+from robocasa.models.robots.manipulators.g1_robot import G1Full, G1ArmsOnly, G1ArmsAndWaist
 from .gymnasium_basic import (
     REGISTERED_ENVS,
     RoboCasaEnv,
@@ -35,11 +35,19 @@ class GrootRoboCasaEnv(RoboCasaEnv):
                 ] = spaces.Box(
                     low=0, high=255, shape=(*FINAL_IMAGE_RESOLUTION, 3), dtype=np.uint8
                 )
-        if isinstance(self.env.robots[0].robot_model, GR1ArmsOnly):
+        if isinstance(self.env.robots[0].robot_model, GR1Full):
+            self.observation_space["annotation.human.coarse_action"] = spaces.Text(
+                max_length=256, charset=ALLOWED_LANGUAGE_CHARSET
+            )
+        elif isinstance(self.env.robots[0].robot_model, GR1ArmsOnly):
             self.observation_space["annotation.human.coarse_action"] = spaces.Text(
                 max_length=256, charset=ALLOWED_LANGUAGE_CHARSET
             )
         elif isinstance(self.env.robots[0].robot_model, GR1ArmsAndWaist):
+            self.observation_space["annotation.human.coarse_action"] = spaces.Text(
+                max_length=256, charset=ALLOWED_LANGUAGE_CHARSET
+            )
+        elif isinstance(self.env.robots[0].robot_model, G1Full):
             self.observation_space["annotation.human.coarse_action"] = spaces.Text(
                 max_length=256, charset=ALLOWED_LANGUAGE_CHARSET
             )
@@ -116,11 +124,19 @@ class GrootRoboCasaEnv(RoboCasaEnv):
                 )
             elif "world_view" in mapped_name:
                 obs[mapped_name] = raw_obs[camera_name + "_image"]
-        if isinstance(self.env.robots[0].robot_model, GR1ArmsOnly):
+        if isinstance(self.env.robots[0].robot_model, GR1Full):
+            obs[
+                "annotation.human.coarse_action"
+            ] = f"unlocked_waist: {raw_obs['language']}"
+        elif isinstance(self.env.robots[0].robot_model, GR1ArmsOnly):
             obs[
                 "annotation.human.coarse_action"
             ] = f"locked_waist: {raw_obs['language']}"
         elif isinstance(self.env.robots[0].robot_model, GR1ArmsAndWaist):
+            obs[
+                "annotation.human.coarse_action"
+            ] = f"unlocked_waist: {raw_obs['language']}"
+        elif isinstance(self.env.robots[0].robot_model, G1Full):
             obs[
                 "annotation.human.coarse_action"
             ] = f"unlocked_waist: {raw_obs['language']}"
