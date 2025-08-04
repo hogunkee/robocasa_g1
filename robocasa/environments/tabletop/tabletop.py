@@ -86,13 +86,17 @@ _ROBOT_POS_OFFSETS: dict[str, list[float]] = {
     "G1Full": [0, 0, 0.97],
     "G1FullInspireHands": [0, 0, 0.97],
     "G1FullFourierHands": [0, 0, 0.97],
+    "G1FullDex31Hands": [0, 0, 0.97],
     "G1FixedLowerBody": [0, 0, 0.97],
     "G1FixedLowerBodyInspireHands": [0, 0, 0.97],
     "G1FixedLowerBodyFourierHands": [0, 0, 0.97],
+    "G1FixedLowerBodyDex31Hands": [0, 0, 0.97],
     "G1ArmsOnly": [0, 0, 0.97],
     "G1ArmsOnlyInspireHands": [0, 0, 0.97],
     "G1ArmsOnlyFourierHands": [0, 0, 0.97],
+    "G1ArmsOnlyDex31Hands": [0, 0, 0.97],
     "G1ArmsAndWaistFourierHands": [0, 0, 0.97],
+    "G1ArmsAndWaistDex31Hands": [0, 0, 1.25],
     "GoogleRobot": [0, 0, 0],
     "NeoFixedLowerBody": [0, -0.05, 0.8],
     "NeoArmsOnly": [0, -0.05, 0.8],
@@ -1193,12 +1197,29 @@ class Tabletop(ManipulationEnv, metaclass=TabletopEnvMeta):
         )
         if worldview_mount_body is not None:
             self._cam_configs["worldview"] = dict(
-                pos=[0.75, 0.0, 0.9,],
+                pos=[0.5, 0.0, 0.75,],
+                # pos=[0.75, 0.0, 0.9,],
                 quat=[0.683, 0.183, 0.183, 0.683],
                 # quat=[0.653, 0.271, 0.271, 0.653],
                 camera_attribs=dict(fovy="77"),
                 parent_body="robot0_base",
             )
+
+        # # Add world camera
+        # worldview_mount_body = find_elements(
+        #     root=self.robots[0].robot_model.root,
+        #     tags="body",
+        #     attribs={"name": "robot0_base"},
+        # )
+        # if worldview_mount_body is not None:
+        #     self._cam_configs["worldview"] = dict(
+        #         pos=[0.5, 0.0, 0.75,],
+        #         # pos=[0.75, 0.0, 0.9,],
+        #         quat=[0.683, 0.183, 0.183, 0.683],
+        #         # quat=[0.653, 0.271, 0.271, 0.653],
+        #         camera_attribs=dict(fovy="77"),
+        #         parent_body="robot0_base",
+        #     )
 
         if self.randomize_cameras:
             self._randomize_cameras()

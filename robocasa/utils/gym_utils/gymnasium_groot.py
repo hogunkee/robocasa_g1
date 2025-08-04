@@ -207,6 +207,12 @@ def create_grootrobocasa_env_class(env, robot, robot_alias):
             id=id_name,  # Unique ID for the environment
             entry_point=f"robocasa.utils.gym_utils.gymnasium_groot:{class_name}",  # Path to your environment class
         )
+    elif robot_alias == "g1_arms_waist_dex31_hands":
+        id_name = f"g1_unified/{class_name}"
+        register(
+            id=id_name,  # Unique ID for the environment
+            entry_point=f"robocasa.utils.gym_utils.gymnasium_groot:{class_name}",  # Path to your environment class
+        )
 
 
 for ENV in REGISTERED_ENVS:

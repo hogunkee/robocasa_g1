@@ -21,6 +21,13 @@ class G1FixedLowerBodyFourierHands(G1FixedLowerBody):
     @property
     def default_gripper(self):
         return {"right": "FourierRightHand", "left": "FourierLeftHand"}
+    
+
+@register_robot_class("LeggedRobot")
+class G1FixedLowerBodyDex31Hands(G1FixedLowerBody):
+    @property
+    def default_gripper(self):
+        return {"right": "Dex31RightHand", "left": "Dex31LeftHand"}
 
 
 @register_robot_class("LeggedRobot")
@@ -35,6 +42,13 @@ class G1ArmsOnlyFourierHands(G1ArmsOnly):
     @property
     def default_gripper(self):
         return {"right": "FourierRightHand", "left": "FourierLeftHand"}
+    
+
+@register_robot_class("LeggedRobot")
+class G1ArmsOnlyDex31Hands(G1ArmsOnly):
+    @property
+    def default_gripper(self):
+        return {"right": "Dex31RightHand", "left": "Dex31LeftHand"}
 
 
 @register_robot_class("LeggedRobot")
@@ -64,6 +78,11 @@ class G1ArmsAndWaistFourierHands(G1ArmsAndWaist):
 
 
 @register_robot_class("LeggedRobot")
+class G1ArmsAndWaistDex31Hands(G1ArmsAndWaist):
+    pass
+
+
+@register_robot_class("LeggedRobot")
 class G1Full(G1):
     def __init__(self, idn=0):
         super().__init__(idn=idn)
@@ -81,3 +100,10 @@ class G1FullFourierHands(G1Full):
     @property
     def default_gripper(self):
         return {"right": "FourierRightHand", "left": "FourierLeftHand"}
+    
+
+@register_robot_class("LeggedRobot")
+class G1FullDex31Hands(G1Full):
+    @property
+    def default_gripper(self):
+        return {"right": "Dex31RightHand", "left": "Dex31LeftHand"}

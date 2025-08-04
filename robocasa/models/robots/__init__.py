@@ -11,6 +11,8 @@ from robosuite.models.grippers import (
     InspireRightHand,
     FourierLeftHand,
     FourierRightHand,
+    Dex31LeftHand,
+    Dex31RightHand,
 )
 
 from .manipulators import *
@@ -23,6 +25,8 @@ def unformat_gripper_space(gripper, formatted_action):
         action = formatted_action[[0, 2, 4, 6, 8, 11]]
     elif isinstance(gripper, FourierLeftHand) or isinstance(gripper, FourierRightHand):
         action = formatted_action[[0, 1, 4, 6, 8, 10]]
+    elif isinstance(gripper, Dex31LeftHand) or isinstance(gripper, Dex31RightHand):
+        action = formatted_action[[0, 1, 2, 3, 4, 5, 6]]
     elif isinstance(gripper, PandaGripper):
         action = formatted_action
     else:
@@ -1041,19 +1045,23 @@ GROOT_ROBOCASA_ENVS_G1_FULL = {
     "G1Full": "g1_full_fourier_hands",
     "G1FullInspireHands": "g1_full_inspire_hands",
     "G1FullFourierHands": "g1_full_fourier_hands",
+    "G1FullDex31Hands": "g1_full_dex31_hands",
 }
 GROOT_ROBOCASA_ENVS_G1_ARMS_ONLY = {
     "G1ArmsOnly": "g1_arms_only_fourier_hands",
     "G1ArmsOnlyInspireHands": "g1_arms_only_inspire_hands",
     "G1ArmsOnlyFourierHands": "g1_arms_only_fourier_hands",
+    "G1ArmsOnlyDex31Hands": "g1_arms_only_dex31_hands",
 }
 GROOT_ROBOCASA_ENVS_G1_ARMS_AND_WAIST = {
     "G1ArmsAndWaistFourierHands": "g1_arms_waist_fourier_hands",
+    "G1ArmsAndWaistDex31Hands": "g1_arms_waist_dex31_hands",
 }
 GROOT_ROBOCASA_ENVS_G1_FIXED_LOWER_BODY = {
     "G1FixedLowerBody": "g1_fixed_lower_body_fourier_hands",
     "G1FixedLowerBodyInspireHands": "g1_fixed_lower_body_inspire_hands",
     "G1FixedLowerBodyFourierHands": "g1_fixed_lower_body_fourier_hands",
+    "G1FixedLowerBodyDex31Hands": "g1_fixed_lower_body_dex31_hands",
 }
 GROOT_ROBOCASA_ENVS_GR1_FULL = {
     "GR1Full": "gr1_full_fourier_hands",
