@@ -122,8 +122,8 @@ class GrootRoboCasaEnv(RoboCasaEnv):
                 ] = GrootRoboCasaEnv.process_img_cotrain(
                     raw_obs[camera_name + "_image"]
                 )
-            elif "world_view" in mapped_name:
-                obs[mapped_name] = raw_obs[camera_name + "_image"]
+            #elif "world_view" in mapped_name:
+            #    obs[mapped_name] = raw_obs[camera_name + "_image"]
         if isinstance(self.env.robots[0].robot_model, GR1Full):
             obs[
                 "annotation.human.coarse_action"

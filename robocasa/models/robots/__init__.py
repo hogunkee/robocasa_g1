@@ -527,8 +527,8 @@ class GR1FullKeyConverter(RobotKeyConverter):
             "body.right_arm": input_action["robot0_right"],
             "body.waist": input_action["robot0_torso"],
             "body.neck": input_action["robot0_head"],
-            "body.left_leg": input_obs["robot0_legs"][:6],
-            "body.right_leg": input_obs["robot0_legs"][6:],
+            "body.left_leg": input_action["robot0_legs"][:6],
+            "body.right_leg": input_action["robot0_legs"][6:],
         }
         return output_action
 
