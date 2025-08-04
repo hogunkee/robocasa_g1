@@ -512,7 +512,8 @@ class GR1FullKeyConverter(RobotKeyConverter):
             "body.left_arm": input_obs["robot0_left"],
             "body.waist": input_obs["robot0_torso"],
             "body.neck": input_obs["robot0_head"],
-            "body.legs": input_obs["robot0_legs"],
+            "body.right_leg": input_obs["robot0_right_leg"],
+            "body.left_leg": input_obs["robot0_left_leg"],
         }
         return output_obs
 
@@ -526,7 +527,8 @@ class GR1FullKeyConverter(RobotKeyConverter):
             "body.right_arm": input_action["robot0_right"],
             "body.waist": input_action["robot0_torso"],
             "body.neck": input_action["robot0_head"],
-            "body.legs": input_action["robot0_legs"],
+            "body.right_leg": input_obs["robot0_right_leg"],
+            "body.left_leg": input_obs["robot0_left_leg"],
         }
         return output_action
 
@@ -540,15 +542,16 @@ class GR1FullKeyConverter(RobotKeyConverter):
             "robot0_right": input_action["action.right_arm"],
             "robot0_torso": input_action["action.waist"],
             "robot0_head": input_action["action.neck"],
-            "robot0_legs": input_action["action.legs"],
+            "robot0_left_leg": input_action["action.left_leg"],
+            "robot0_right_leg": input_action["action.right_leg"],
         }
         return output_action
 
     @classmethod
     def get_missing_keys_in_dumping_dataset(cls):
         return {
-            "body.right_leg": np.zeros(6, dtype=np.float64),
-            "body.left_leg": np.zeros(6, dtype=np.float64),
+            # "body.right_leg": np.zeros(6, dtype=np.float64),
+            # "body.left_leg": np.zeros(6, dtype=np.float64),
         }
 
     @classmethod
