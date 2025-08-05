@@ -681,6 +681,8 @@ def create_pnp_class(
         current_qpos = self.sim.data.qpos.copy()
 
         for name in self.sim.model.joint_names:
+            if name is None:
+                continue
             if "robot0_" in name:
                 joint_id = self.sim.model.joint_name2id(name)
                 if name in cotrain_qpos:
