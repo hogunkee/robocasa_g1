@@ -96,7 +96,7 @@ _ROBOT_POS_OFFSETS: dict[str, list[float]] = {
     "G1ArmsOnlyFourierHands": [0, 0, 0.97],
     "G1ArmsOnlyDex31Hands": [0, 0, 0.97],
     "G1ArmsAndWaistFourierHands": [0, 0, 0.97],
-    "G1ArmsAndWaistDex31Hands": [0, 0, 1.25],
+    "G1ArmsAndWaistDex31Hands": [0, 0, 1.15],
     "GoogleRobot": [0, 0, 0],
     "NeoFixedLowerBody": [0, -0.05, 0.8],
     "NeoArmsOnly": [0, -0.05, 0.8],
@@ -1204,6 +1204,21 @@ class Tabletop(ManipulationEnv, metaclass=TabletopEnvMeta):
                 camera_attribs=dict(fovy="77"),
                 parent_body="robot0_base",
             )
+        
+        # Add Realsense Camera
+        rs_mount_body = find_elements(
+            root=self.robots[0].robot_model.root,
+            tags="body",
+            attribs={"name": "robot0_torso_link"},
+        )
+        if rs_mount_body is not None:
+            self._cam_configs["rs_view"] = dict(
+                pos=[0.0576235, 0.01753, 0.41987],
+                euler=[0, -42.4/180*np.pi, -np.pi/2],
+                #euler=[0, -0.8307767239493009, -np.pi/2],
+                camera_attribs=dict(fovy="55.2"), # 57
+                parent_body="robot0_torso_link",
+            )
 
         # # Add world camera
         # worldview_mount_body = find_elements(
@@ -1349,7 +1364,10 @@ class Tabletop(ManipulationEnv, metaclass=TabletopEnvMeta):
                 cam_root.append(cam)
 
             cam.set("pos", array_to_string(cam_config["pos"]))
-            cam.set("quat", array_to_string(cam_config["quat"]))
+            if "quat" in cam_config:
+                cam.set("quat", array_to_string(cam_config["quat"]))
+            elif "euler" in cam_config:
+                cam.set("euler", array_to_string(cam_config["euler"]))
             for k, v in cam_config.get("camera_attribs", {}).items():
                 cam.set(k, v)
 

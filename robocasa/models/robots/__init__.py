@@ -244,9 +244,9 @@ class RobotKeyConverter:
 class G1FullKeyConverter(RobotKeyConverter):
     @classmethod
     def get_camera_config(cls):
-        mapped_names = ["video.agentview_pad_res256_freq20"]
+        mapped_names = ["video.ego_view_pad_res256_freq20", "video.rs_view_pad_res256_freq20", "video.world_view"]
         camera_names = [
-            "agentview", "worldview"
+            "egoview", "rs_view", "worldview"
         ]
         camera_widths, camera_heights = 1280, 800
         return mapped_names, camera_names, camera_widths, camera_heights
@@ -310,9 +310,9 @@ class G1FullKeyConverter(RobotKeyConverter):
 class G1ArmsOnlyKeyConverter(RobotKeyConverter):
     @classmethod
     def get_camera_config(cls):
-        mapped_names = ["video.ego_view_pad_res256_freq20", "video.world_view"]
+        mapped_names = ["video.ego_view_pad_res256_freq20", "video.rs_view_pad_res256_freq20", "video.world_view"]
         camera_names = [
-            "egoview", "worldview"
+            "egoview", "rs_view", "worldview"
         ]
         camera_widths, camera_heights = 1280, 800
         return mapped_names, camera_names, camera_widths, camera_heights
@@ -370,9 +370,9 @@ class G1ArmsOnlyKeyConverter(RobotKeyConverter):
 class G1ArmsAndWaistKeyConverter(RobotKeyConverter):
     @classmethod
     def get_camera_config(cls):
-        mapped_names = ["video.ego_view_pad_res256_freq20", "video.world_view"]
+        mapped_names = ["video.ego_view_pad_res256_freq20", "video.rs_view_pad_res256_freq20", "video.world_view"]
         camera_names = [
-            "egoview", "worldview"
+            "egoview", "rs_view", "worldview"
         ]
         camera_widths, camera_heights = 1280, 800
         return mapped_names, camera_names, camera_widths, camera_heights
@@ -432,9 +432,9 @@ class G1ArmsAndWaistKeyConverter(RobotKeyConverter):
 class G1FixedLowerBodyKeyConverter(RobotKeyConverter):
     @classmethod
     def get_camera_config(cls):
-        mapped_names = ["video.ego_view_pad_res256_freq20", "video.world_view"]
+        mapped_names = ["video.ego_view_pad_res256_freq20", "video.rs_view_pad_res256_freq20", "video.world_view"]
         camera_names = [
-            "egoview", "worldview"
+            "egoview", "rs_view", "worldview"
         ]
         camera_widths, camera_heights = 1280, 800
         return mapped_names, camera_names, camera_widths, camera_heights
@@ -685,9 +685,9 @@ class GR1ArmsAndWaistKeyConverter(RobotKeyConverter):
 class GR1FixedLowerBodyKeyConverter(RobotKeyConverter):
     @classmethod
     def get_camera_config(cls):
-        mapped_names = ["video.agentview_pad_res256_freq20"]
+        mapped_names = ["video.ego_view_pad_res256_freq20", "video.world_view"]
         camera_names = [
-            "agentview",
+            "egoview", "worldview"
         ]
         camera_widths, camera_heights = 1280, 800
         return mapped_names, camera_names, camera_widths, camera_heights
