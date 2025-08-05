@@ -96,7 +96,7 @@ _ROBOT_POS_OFFSETS: dict[str, list[float]] = {
     "G1ArmsOnlyFourierHands": [0, 0, 0.97],
     "G1ArmsOnlyDex31Hands": [0, 0, 0.97],
     "G1ArmsAndWaistFourierHands": [0, 0, 0.97],
-    "G1ArmsAndWaistDex31Hands": [0, 0, 1.15],
+    "G1ArmsAndWaistDex31Hands": [0, 0, 1.02], #1.02
     "GoogleRobot": [0, 0, 0],
     "NeoFixedLowerBody": [0, -0.05, 0.8],
     "NeoArmsOnly": [0, -0.05, 0.8],
@@ -1097,6 +1097,13 @@ class Tabletop(ManipulationEnv, metaclass=TabletopEnvMeta):
                 l_elbow_pitch_range = self.sim.model.jnt_range[l_elbow_pitch_id]
                 self.sim.data.qpos[self.sim.model.get_joint_qpos_addr(joint_name)] = (
                     l_elbow_pitch_range[0] * 0.7 + l_elbow_pitch_range[1] * 0.3
+                )
+        elif "G1" in self.robots[0].name:
+            for joint_name in ["robot0_left_elbow_joint", "robot0_right_elbow_joint"]:
+                l_elbow_pitch_id = self.sim.model.joint_name2id(joint_name)
+                l_elbow_pitch_range = self.sim.model.jnt_range[l_elbow_pitch_id]
+                self.sim.data.qpos[self.sim.model.get_joint_qpos_addr(joint_name)] = (
+                    l_elbow_pitch_range[0] * 0.8 + l_elbow_pitch_range[1] * 0.2
                 )
         elif "BDM1" in self.robots[0].name:
             for joint_name in ["robot0_larm.el", "robot0_rarm.el"]:

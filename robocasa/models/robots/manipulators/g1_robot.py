@@ -65,10 +65,13 @@ class G1ArmsAndWaist(G1):
     @property
     def init_qpos(self):
         init_qpos = np.array([0.0] * 17)
-        right_arm_init = np.array([0.0, -0.1, 0.0, -1.57, 0.0, 0.0, 0.0])
-        left_arm_init = np.array([0.0, 0.1, 0.0, -1.57, 0.0, 0.0, 0.0])
+        right_arm_init = np.array([0.0, -0.1, 0.0, -0.2, 0.0, 0.0, 0.0])
+        left_arm_init = np.array([0.0, 0.1, 0.0, -0.2, 0.0, 0.0, 0.0])
+        # right_arm_init = np.array([0.0, -0.1, 0.0, -1.57, 0.0, 0.0, 0.0])
+        # left_arm_init = np.array([0.0, 0.1, 0.0, -1.57, 0.0, 0.0, 0.0])
         init_qpos[3:10] = right_arm_init
         init_qpos[10:17] = left_arm_init
+        print("init qpos:", init_qpos)
         return init_qpos
 
 
