@@ -542,7 +542,7 @@ class GR1FullKeyConverter(RobotKeyConverter):
             "robot0_right": input_action["action.right_arm"],
             "robot0_torso": input_action["action.waist"],
             "robot0_head": input_action["action.neck"],
-            "robot0_legs": np.concatenate(input_action["action.left_leg"], input_action["action.right_leg"]),
+            "robot0_legs": np.concatenate([input_action["action.left_leg"], input_action["action.right_leg"]]),
         }
         return output_action
 
