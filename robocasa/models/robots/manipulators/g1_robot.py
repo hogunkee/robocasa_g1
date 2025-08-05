@@ -71,7 +71,6 @@ class G1ArmsAndWaist(G1):
         # left_arm_init = np.array([0.0, 0.1, 0.0, -1.57, 0.0, 0.0, 0.0])
         init_qpos[3:10] = right_arm_init
         init_qpos[10:17] = left_arm_init
-        print("init qpos:", init_qpos)
         return init_qpos
 
 
