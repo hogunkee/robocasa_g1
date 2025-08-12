@@ -64,49 +64,33 @@ Please refer to https://github.com/hogunkee/GR00T_G1 to install Isaac-GR00T **fo
 Inside the GR00T_G1 repository, run the inference server:
 
 ```bash
-cd Isaac-GR00T
+cd GR00T_G1
 python3 scripts/inference_service.py --server \
     --model_path <MODEL_PATH> \
-    --data_config gr1_arms_waist
+    --data_config dex31_g1_arms_waist
+    --embodiment_tag g1
 ```
 
 Inside the Isaac-GR00T repository, run the simulation evaluation script to evaluate a single task with 10 episodes.
 
 ```bash
-cd Isaac-GR00T
+cd GR00T_G1
 python3 scripts/simulation_service.py --client \
     --env_name <TASK_NAME> \
     --video_dir ./videos \
     --max_episode_steps 720 \
     --n_envs 5 \
     --n_episodes 10
+    --embodiment_tag g1
 ```
 
-This script will run the model in a simulated environment for a given number of episodes, collect success metrics, and save rollout videos for inspection. It's a complementary method to the offline evaluation that gives insight into how the policy performs when interacting with the environment. Here is a full list of 24 tabletop task names:
+This script will run the model in a simulated environment for a given number of episodes, collect success metrics, and save rollout videos for inspection. It's a complementary method to the offline evaluation that gives insight into how the policy performs when interacting with the environment. Below is a list of example task names:
 
 ```bash
-gr1_unified/PnPCupToDrawerClose_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PnPPotatoToMicrowaveClose_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PnPMilkToMicrowaveClose_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PnPBottleToCabinetClose_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PnPWineToCabinetClose_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PnPCanToDrawerClose_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PosttrainPnPNovelFromCuttingboardToBasketSplitA_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PosttrainPnPNovelFromCuttingboardToCardboardboxSplitA_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PosttrainPnPNovelFromCuttingboardToPanSplitA_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PosttrainPnPNovelFromCuttingboardToPotSplitA_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PosttrainPnPNovelFromCuttingboardToTieredbasketSplitA_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PosttrainPnPNovelFromPlacematToBasketSplitA_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PosttrainPnPNovelFromPlacematToBowlSplitA_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PosttrainPnPNovelFromPlacematToPlateSplitA_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PosttrainPnPNovelFromPlacematToTieredshelfSplitA_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PosttrainPnPNovelFromPlateToBowlSplitA_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PosttrainPnPNovelFromPlateToCardboardboxSplitA_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PosttrainPnPNovelFromPlateToPanSplitA_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PosttrainPnPNovelFromPlateToPlateSplitA_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PosttrainPnPNovelFromTrayToCardboardboxSplitA_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PosttrainPnPNovelFromTrayToPlateSplitA_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PosttrainPnPNovelFromTrayToPotSplitA_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PosttrainPnPNovelFromTrayToTieredbasketSplitA_GR1ArmsAndWaistFourierHands_Env
-gr1_unified/PosttrainPnPNovelFromTrayToTieredshelfSplitA_GR1ArmsAndWaistFourierHands_Env
+g1_unified/PnPCupToDrawerClose_G1ArmsAndWaistDex31Hands_Env
+g1_unified/PnPPotatoToMicrowaveClose_G1ArmsAndWaistDex31Hands_Env
+g1_unified/PnPMilkToMicrowaveClose_G1ArmsAndWaistDex31Hands_Env
+g1_unified/PnPBottleToCabinetClose_G1ArmsAndWaistDex31Hands_Env
+g1_unified/PnPWineToCabinetClose_G1ArmsAndWaistDex31Hands_Env
+g1_unified/PnPCanToDrawerClose_G1ArmsAndWaistDex31Hands_Env
 ```
