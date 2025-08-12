@@ -26,6 +26,7 @@ Robocasa-G1 enables:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/Robocasa-g1.git
-   cd Robocasa-g1
+   git clone https://github.com/hogunkee/robocasa_g1
+   cd robocasa_g1
+   pip install -e .
 
