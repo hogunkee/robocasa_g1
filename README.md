@@ -1,7 +1,7 @@
 # Robocasa-G1
 
 <p align="center">
-  <img width="35%" src="images/g1_front.png">
+  <img width="38%" src="images/g1_front.png">
   <img width="30%" src="images/g1_back.png">
   <img width="30%" src="images/g1_top.png">
 </p>
