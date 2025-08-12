@@ -1,5 +1,11 @@
 # Robocasa-G1
 
+<p align="center">
+  <img width="35%" src="images/g1_front.png">
+  <img width="30%" src="images/g1_back.png">
+  <img width="30%" src="images/g1_top.png">
+</p>
+
 **Robocasa-G1** is built upon the [Robocasa](https://github.com/robocasa/robocasa) and [RoboCasa GR-1 Tabletop Tasks](https://github.com/robocasa/robocasa-gr1-tabletop-tasks) simulation frameworks.
 This repository is a fork that adds support for the **Unitree G1 humanoid robot**.
 It integrates the G1 model, assets, and control interface into Robocasa’s household manipulation environments, enabling tabletop tasks specifically tailored to G1’s kinematics and workspace.
