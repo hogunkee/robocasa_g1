@@ -17,12 +17,11 @@ It integrates the G1 model, assets, and control interface into Robocasa’s hous
 Robocasa-G1 enables:
 - Simulation of Unitree G1 in Robocasa environments
 - Tabletop task setups adapted for G1 reach and joint limits
-- Ready-to-use environment configurations for RL and imitation learning
 
 ---
 
 ## Key Changes from Original Robocasa
-- Added **G1 URDF** and mesh assets
+- Added **G1** model and configuration
 - Updated robot model loader to support G1 joint naming & limits
 - Tuned tabletop task scene layouts to match G1’s manipulation range
 
@@ -36,13 +35,13 @@ The easiest way to set up is through the [Anaconda](https://www.anaconda.com/) p
 conda create -c conda-forge -n robocasa python=3.10
 conda activate robocasa
 
-# 2. Clone and install Isaac-GR00T
+# 2. Clone and install Isaac-GR00T for Unitree G1
 git clone https://github.com/hogunkee/GR00T_G1 
 pip install --upgrade setuptools
 pip install -e GR00T_G1
 pip install --no-build-isolation flash-attn==2.7.1.post4 
 
-# 3. Clone and install robosuite
+# 3. Clone and install robosuite-g1
 git clone https://github.com/hogunkee/robosuite_g1 
 pip install -e robosuite_g1
 
@@ -55,9 +54,9 @@ cd robocasa_g1
 python robocasa/scripts/download_tabletop_assets.py -y
 ```
 
-## Simulation-based Evaluation for GR00T-N1.5-3B
+## GR00T Evaluation on Unitree G1
 
-The main purpose of this repository is to evaluate the model in simulation to better understand its behavior in closed-loop settings. This is especially useful for assessing quantitative performance on long-horizon or multi-step tasks.
+Evaluate the pretrained Isaac GR00T-N1.5 model on Unitree G1 in simulation.
 
 Please refer to https://github.com/hogunkee/GR00T_G1 to install Isaac-GR00T **for Unitree G1**.
 
