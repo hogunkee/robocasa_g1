@@ -260,7 +260,6 @@ class G1FullKeyConverter(RobotKeyConverter):
             "body.right_arm": input_obs["robot0_right"],
             "body.left_arm": input_obs["robot0_left"],
             "body.waist": input_obs["robot0_torso"],
-            "body.neck": input_obs["robot0_head"],
             "body.legs": input_obs["robot0_legs"],
         }
         return output_obs
@@ -274,7 +273,6 @@ class G1FullKeyConverter(RobotKeyConverter):
             "body.left_arm": input_action["robot0_left"],
             "body.right_arm": input_action["robot0_right"],
             "body.waist": input_action["robot0_torso"],
-            "body.neck": input_action["robot0_head"],
             "body.legs": input_action["robot0_legs"],
         }
         return output_action
@@ -288,7 +286,6 @@ class G1FullKeyConverter(RobotKeyConverter):
             "robot0_left": input_action["action.left_arm"],
             "robot0_right": input_action["action.right_arm"],
             "robot0_torso": input_action["action.waist"],
-            "robot0_head": input_action["action.neck"],
             "robot0_legs": input_action["action.legs"],
         }
         return output_action
@@ -448,7 +445,6 @@ class G1FixedLowerBodyKeyConverter(RobotKeyConverter):
             "body.right_arm": input_obs["robot0_right"],
             "body.left_arm": input_obs["robot0_left"],
             "body.waist": input_obs["robot0_torso"],
-            "body.neck": input_obs["robot0_head"],
         }
         return output_obs
 
@@ -461,7 +457,6 @@ class G1FixedLowerBodyKeyConverter(RobotKeyConverter):
             "body.left_arm": input_action["robot0_left"],
             "body.right_arm": input_action["robot0_right"],
             "body.waist": input_action["robot0_torso"],
-            "body.neck": input_action["robot0_head"],
         }
         return output_action
 
@@ -474,7 +469,6 @@ class G1FixedLowerBodyKeyConverter(RobotKeyConverter):
             "robot0_left": input_action["action.left_arm"],
             "robot0_right": input_action["action.right_arm"],
             "robot0_torso": input_action["action.waist"],
-            "robot0_head": input_action["action.neck"],
         }
         return output_action
 

@@ -9,12 +9,12 @@
     <!-- front view -->
     <camera mode="fixed" name="frontview" pos="2.65 -0.6 2.3" quat="0 0 0.423 0.906" />
     <!-- back view -->
-    <camera mode="fixed" name="backview" pos="2.65 -4.5 1.2" quat="0.707 0.707 0 0" />
+    <camera mode="fixed" name="backview" pos="2.65 -5 1.2" quat="0.707 0.707 0 0" />
     <!-- <camera mode="fixed" name="backview1" pos="2.65 -4 1.2" quat="0 0 -0.707 0.707" />
     <camera mode="fixed" name="backview2" pos="2.65 -4 1.2" quat="-0.5 -0.5 -0.5 0.5" />
     <camera mode="fixed" name="backview3" pos="2.65 -4 1.2" quat="0.5 0.5 -0.5 0.5" /> -->
     <!-- side view -->
-    <camera mode="fixed" name="sideview" pos="4.5 -2 1.2" quat="0.5 0.5 0.5 0.5"/> <!--0.56 0.43 0.43 0.56"/-->
+    <camera mode="fixed" name="sideview" pos="5 -2 1.2" quat="0.5 0.5 0.5 0.5"/> <!--0.56 0.43 0.43 0.56"/-->
     <!-- bird view -->
     <camera mode="fixed" name="birdview" pos="2.65 -1.9 2.8" quat="1 0 0 0"/>
     <!-- <camera mode="fixed" name="birdview" pos="2.65 -2.175 3.0" quat="0.7071 0 0 0.7071"/> -->

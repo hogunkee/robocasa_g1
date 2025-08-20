@@ -86,7 +86,7 @@ _ROBOT_POS_OFFSETS: dict[str, list[float]] = {
     "G1Full": [0, 0, 0.97],
     "G1FullInspireHands": [0, 0, 0.97],
     "G1FullFourierHands": [0, 0, 0.97],
-    "G1FullDex31Hands": [0, 0, 0.97],
+    "G1FullDex31Hands": [0, -0.35, 0.97],
     "G1FixedLowerBody": [0, 0, 0.97],
     "G1FixedLowerBodyInspireHands": [0, 0, 0.97],
     "G1FixedLowerBodyFourierHands": [0, 0, 0.97],
@@ -1078,7 +1078,7 @@ class Tabletop(ManipulationEnv, metaclass=TabletopEnvMeta):
 
         # zero_action only works with IK in delta mode.
         # When evaluating, not calling IK and directly applying zero_action leads to an error.
-        if len(self.robots) == 1 and "GR1" in self.robots[0].name:
+        if len(self.robots) == 1 and ("GR1" in self.robots[0].name or "G1" in self.robots[0].name):
             self.robots[0].composite_controller.reset()
             policy_step = False
 
@@ -1098,6 +1098,36 @@ class Tabletop(ManipulationEnv, metaclass=TabletopEnvMeta):
                 self.sim.data.qpos[self.sim.model.get_joint_qpos_addr(joint_name)] = (
                     l_elbow_pitch_range[0] * 0.7 + l_elbow_pitch_range[1] * 0.3
                 )
+        elif "G1Full" in self.robots[0].name:
+            joint_names = ["left_hip_pitch", "left_hip_roll", "left_hip_yaw", "left_knee", "left_ankle_pitch", "left_ankle_roll",
+                "right_hip_pitch", "right_hip_roll", "right_hip_yaw", "right_knee", "right_ankle_pitch", "right_ankle_roll",
+                "waist_yaw", "waist_roll", "waist_pitch",
+                "left_shoulder_pitch", "left_shoulder_roll", "left_shoulder_yaw", "left_elbow",
+                "right_shoulder_pitch", "right_shoulder_roll", "right_shoulder_yaw", "right_elbow"]
+            default_poses = [
+                    -0.1, 0.0, 0.0, 0.3, -0.2, 0.0,
+                    -0.1, 0.0, 0.0, 0.3, -0.2, 0.0,
+                    0.0, 0.0, 0.0,
+                    0.5, 0.0, 0.2, 0.3,
+                    0.5, 0.0, -0.2, 0.3,
+                ]
+            for i, joint_name in enumerate(joint_names):
+                qpos = default_poses[i]
+                joint_name = "robot0_" + joint_name + "_joint"
+                joint_id = self.sim.model.joint_name2id(joint_name)
+                self.sim.data.qpos[self.sim.model.get_joint_qpos_addr(joint_name)] = qpos
+            # for joint_name in ["robot0_left_shoulder_pitch_joint", "robot0_right_shoulder_pitch_joint"]:
+            #     l_shoulder_pitch_id = self.sim.model.joint_name2id(joint_name)
+            #     l_shoulder_pitch_range = self.sim.model.jnt_range[l_shoulder_pitch_id]
+            #     self.sim.data.qpos[self.sim.model.get_joint_qpos_addr(joint_name)] = (
+            #         l_shoulder_pitch_range[0] * 0.45 + l_shoulder_pitch_range[1] * 0.55
+            #     )
+            # for joint_name in ["robot0_left_elbow_joint", "robot0_right_elbow_joint"]:
+            #     l_elbow_pitch_id = self.sim.model.joint_name2id(joint_name)
+            #     l_elbow_pitch_range = self.sim.model.jnt_range[l_elbow_pitch_id]
+            #     self.sim.data.qpos[self.sim.model.get_joint_qpos_addr(joint_name)] = (
+            #         l_elbow_pitch_range[0] * 0.5 + l_elbow_pitch_range[1] * 0.5
+            #     )
         elif "G1" in self.robots[0].name:
             for joint_name in ["robot0_left_elbow_joint", "robot0_right_elbow_joint"]:
                 l_elbow_pitch_id = self.sim.model.joint_name2id(joint_name)
