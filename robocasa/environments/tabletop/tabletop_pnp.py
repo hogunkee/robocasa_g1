@@ -1845,6 +1845,92 @@ class PnPFruitToPlateSplitB(PnPFruitToPlate):
         super().__init__(*args, **kwargs)
 
 
+class EvalPnPAppleToPlate(TabletopPnP):
+    def __init__(self, *args, **kwargs):
+        super().__init__(
+            obj_groups="apple",
+            target_container="plate",
+            source_container_size=(0.5, 0.3),
+            target_container_size=(0.5, 0.3),
+            distractor_config={
+            },
+            *args,
+            **kwargs,
+        )
+
+    def _get_obj_cfgs(self):
+        cfgs = super()._get_obj_cfgs()
+        cfgs[0]["placement"]["size"] = (0.7, 0.7)
+        return cfgs
+
+    def _create_objects(self):
+        """
+        Creates and places objects in the tabletop environment.
+        Helper function called by _load_model()
+        """
+        # add objects
+        self.objects = {}
+        exclude_cat = []
+        
+        self.object_cfgs = self._get_obj_cfgs()
+        unique_obj_num = len(self.object_cfgs)
+        self.object_cfgs.extend(self._get_distractor_obj_cfgs())
+        addl_obj_cfgs = []
+        for obj_num, cfg in enumerate(self.object_cfgs):
+            cfg["type"] = "object"
+            if "name" not in cfg:
+                cfg["name"] = "obj_{}".format(obj_num + 1)
+            cfg["exclude_cat"] = exclude_cat
+            model, info = self._create_obj(cfg)
+            # if obj_num==1:
+            #     model._scale = [2., 2., 2.]
+            cfg["info"] = info
+            if obj_num < unique_obj_num:
+                exclude_cat.append(info["cat"])
+            self.objects[model.name] = model
+            self.model.merge_objects([model])
+
+            try_to_place_in = cfg["placement"].get("try_to_place_in", None)
+
+            # place object in a container and add container as an object to the scene
+            if try_to_place_in and (
+                "in_container" in cfg["info"]["groups_containing_sampled_obj"]
+            ):
+                container_cfg = {
+                    "name": cfg["name"] + "_container",
+                    "obj_groups": cfg["placement"].get("try_to_place_in"),
+                    "placement": deepcopy(cfg["placement"]),
+                    "type": "object",
+                }
+
+                container_kwargs = cfg["placement"].get("container_kwargs", None)
+                if container_kwargs is not None:
+                    for k, v in container_kwargs.items():
+                        container_cfg[k] = v
+
+                # add in the new object to the model
+                addl_obj_cfgs.append(container_cfg)
+                model, info = self._create_obj(container_cfg)
+                container_cfg["info"] = info
+                self.objects[model.name] = model
+                self.model.merge_objects([model])
+
+                # modify object config to lie inside of container
+                cfg["placement"] = dict(
+                    size=(0.01, 0.01),
+                    ensure_object_boundary_in_range=False,
+                    sample_args=dict(
+                        reference=container_cfg["name"],
+                    ),
+                )
+
+        # place the additional objects (usually containers) in first
+        self.object_cfgs = addl_obj_cfgs + self.object_cfgs
+
+        # # remove objects that didn't get created
+        # self.object_cfgs = [cfg for cfg in self.object_cfgs if "model" in cfg]
+
+
 class PnPCylindricalToPlate(TabletopPnP):
     """
     Class for picking and placing cylindrical objects (bottled_drink, bottled_water, boxed_drink, can, milk) onto a plate.

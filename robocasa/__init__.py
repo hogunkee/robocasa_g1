@@ -37,6 +37,7 @@ from robocasa.environments.tabletop.tabletop_pnp import (
     PnPCylindricalToPlate,
     PnPMilkPlateToPlateCotrain,
     PnPAppleToPlateCotrain,
+    EvalPnPAppleToPlate
 )
 from robocasa.environments.tabletop.tabletop_cabinet_door import (
     TabletopCabinetDoor,

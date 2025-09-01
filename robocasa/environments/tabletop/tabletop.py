@@ -96,7 +96,7 @@ _ROBOT_POS_OFFSETS: dict[str, list[float]] = {
     "G1ArmsOnlyFourierHands": [0, 0, 0.97],
     "G1ArmsOnlyDex31Hands": [0, 0, 0.97],
     "G1ArmsAndWaistFourierHands": [0, 0, 0.97],
-    "G1ArmsAndWaistDex31Hands": [0, 0, 1.02], #1.02
+    "G1ArmsAndWaistDex31Hands": [0, 0, 0.87], #1.02
     "GoogleRobot": [0, 0, 0],
     "NeoFixedLowerBody": [0, -0.05, 0.8],
     "NeoArmsOnly": [0, -0.05, 0.8],
